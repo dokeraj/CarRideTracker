@@ -83,4 +83,4 @@ def listRecords():
 
 def runApi():
     from waitress import serve
-    serve(app, host='0.0.0.0', port=2050)
+    serve(app, host='0.0.0.0', port=3050)
