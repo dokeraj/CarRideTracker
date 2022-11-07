@@ -1,1 +1,1 @@
-sqllite_db_location = r"/pyScript/nova.db"
+sqllite_db_location = r"/dbLocation/nova.db"

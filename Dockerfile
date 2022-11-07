@@ -9,6 +9,7 @@ RUN pip3 install waitress
 RUN pip3 install wheel
 
 RUN mkdir /pyScript
+RUN mkdir /dbLocation
 
 ADD api_controller.py /pyScript/
 ADD config.py /pyScript/
