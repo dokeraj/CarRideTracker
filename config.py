@@ -1,0 +1,1 @@
+sqllite_db_location = r"/pyScript/nova.db"
