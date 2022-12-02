@@ -29,16 +29,13 @@ def deleteRecord(record_id):
 # This API has a query string parameter `timestamp`
 @app.route("/api/updateRecord/<record_id>", methods=['PATCH'])
 def updateRecord(record_id):
-    tm_stamp = request.args.get("timestamp", default=-1)
+    input_json = request.json
 
-    if tm_stamp == -1:
-        return abort(
-            Response(json.dumps(
-                {"Error": "Record cannot be updated - add the appropriate timestamp in the query string parameters!"}),
-                status=400,
-                content_type='application/json'))
+    if "user" not in input_json or "timestamp" not in input_json:
+        errResp = json.dumps({"Error": "Cannot update! User or Timestamp field in body is not present!"})
+        return abort(Response(errResp, status=400, content_type='application/json'))
 
-    update_successful = sqliteDatabase.update_record(record_id, tm_stamp)
+    update_successful = sqliteDatabase.update_record(record_id, input_json.get("user"), input_json.get("timestamp"))
 
     if update_successful:
         return Response(json.dumps({"Success": "Record updated"}), status=202, mimetype='application/json')

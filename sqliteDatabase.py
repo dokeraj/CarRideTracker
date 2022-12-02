@@ -51,10 +51,10 @@ def insert_record(user: str, timestamp: int):
     return result
 
 
-def update_record(record_id: int, timestamp: int):
+def update_record(record_id: int, user: str, timestamp: int):
     conn = sqlite3.connect(config.sqllite_db_location)
     cur = conn.cursor()
-    cur.execute(f"UPDATE TRACKING SET TIMESTAMP = {timestamp} WHERE LOG_ID={record_id};")
+    cur.execute(f"UPDATE TRACKING SET TIMESTAMP = {timestamp}, USER = \'{user}\' WHERE LOG_ID={record_id};")
 
     conn.commit()
     result = cur.rowcount == 1
